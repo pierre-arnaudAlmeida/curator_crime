@@ -1,5 +1,14 @@
 require('dotenv').config();
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, Colors } = require('discord.js');
+const MessageUtils = require('../../utils/messageUtils');
+
+let add_or_remove = null;
+let gang = null;
+let channel = null;
+let nbr_of_warns = null;
+let reason = null;
+let mission = null;
+let duration = null;
 
 function computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, duration) {
 	let message = null;
@@ -19,14 +28,21 @@ function computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, 
 		message += "\nMissão : " + mission;
 	}
 
-	if (duration != 0) {
+	if (!duration && duration != 0) {
 		message += "\nDuração : " + duration + " dias";
 	}
 
-	// Add mention of curator and senior curator defined in environment variables
-	message += "\n\n" + "";
-
 	return message;
+}
+
+function getParameters(interaction) {
+	add_or_remove = interaction.options.getBoolean('add_or_remove');
+	gang = interaction.options.getRole('gang');
+	channel = interaction.options.getChannel('channel');
+	nbr_of_warns = interaction.options.getInteger('nbr_of_warns');
+	reason = interaction.options.getString('reason');
+	mission = interaction.options.getString('mission') ?? null;
+	duration = interaction.options.getInteger('duration') ?? null;
 }
 
 module.exports = {
@@ -62,15 +78,9 @@ module.exports = {
 				.setDescription('Give a duration')
 				.setRequired(false)),
 	async execute(interaction) {
-		const add_or_remove = interaction.options.getBoolean('add_or_remove');
-		const gang = interaction.options.getRole('gang');
-		const channel = interaction.options.getChannel('channel');
-		const nbr_of_warns = interaction.options.getInteger('nbr_of_warns');
-		const reason = interaction.options.getString('reason');
-		const mission = interaction.options.getString('mission') ?? null;
-		const duration = interaction.options.getInteger('duration') ?? null;
+		getParameters(interaction);
 
-		await channel.send(computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, duration));
+		await MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso", computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, duration), Colors.Red), interaction)
 		await interaction.reply('Message sent');
 	},
 };
