@@ -1,4 +1,27 @@
-const { SlashCommandBuilder } = require('discord.js');
+require('dotenv').config();
+const { SlashCommandBuilder, Colors } = require('discord.js');
+const MessageUtils = require('../../utils/messageUtils');
+
+let add_or_remove = null;
+let gang = null;
+let channel = null;
+let reason = null;
+
+function computeDescription(gang, reason) {
+	let message = null;
+
+	message = "\n\nOs "+ "<@&" + gang.id + "> estao disband. \n\nSe tiverem armamento ainda nao devolvido da organização peço que façam ticket ingame.\nCaso contrario poderá ser aplicado a regra geral 6.3.";
+	message += "\n\nMotivo : " + reason;
+
+	return message;
+}
+
+function getParameters(interaction) {
+	add_or_remove = interaction.options.getBoolean('add_or_remove');
+	gang = interaction.options.getRole('gang');
+	channel = interaction.options.getChannel('channel');
+	reason = interaction.options.getString('reason');
+}
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -9,7 +32,7 @@ module.exports = {
 				.setDescription('0 : remove and 1 : add')
 				.setRequired(true))
 		.addRoleOption(option =>
-			option.setName('who')
+			option.setName('gang')
 				.setDescription('Mention gang with @')
 				.setRequired(true))
 		.addChannelOption(option =>
@@ -21,6 +44,11 @@ module.exports = {
 				.setDescription('Specify the reason')
 				.setRequired(true)),
 	async execute(interaction) {
+		getParameters(interaction);
+
+		if (add_or_remove) {
+			await MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio disband", computeDescription(gang, reason), Colors.Red), interaction)
+		}
 		await interaction.reply('Message sent');
 	},
 };
