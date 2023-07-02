@@ -6,7 +6,7 @@ const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const keepAlive = require('./utils/server');
 const TOKEN = process.env.TOKEN || null;
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: 17 });
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
@@ -28,6 +28,7 @@ for (const folder of commandFolders) {
 
 client.once(Events.ClientReady, () => {
 	console.log('Curator crime is ready!');
+	client.application.commands.set(client.commands.map(cmd => cmd));
 });
 
 client.on(Events.InteractionCreate, async interaction => {

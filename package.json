@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "discord.js": "^14.11.0",
+    "discord.js": "13.6.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2"
   },
   "name": "Curator Bot",
   "version": "1.0.0",
   "description": "",
-  "main": "curator_crime.js",
+  "main": "curator.js",
   "scripts": {
     "start": "node curator_crime.js"
   },
