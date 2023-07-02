@@ -3,6 +3,8 @@ require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const webhookListener = require('./utils/webhook_listerner');
+const TOKEN = process.env.TOKEN || 3000;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -47,4 +49,6 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.login(process.env.TOKEN);
+client.login(TOKEN);
+
+webhookListener.listen();

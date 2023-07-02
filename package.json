@@ -8,7 +8,7 @@
   "description": "",
   "main": "curator_crime.js",
   "scripts": {
-    "start": "set PORT=3000 && node curator_crime.js"
+    "start": "node curator_crime.js"
   },
   "keywords": [],
   "author": "Pierre-Arnaud Almeida"
