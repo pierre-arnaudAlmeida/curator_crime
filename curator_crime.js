@@ -3,8 +3,8 @@ require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
-const webhookListener = require('./utils/webhook_listerner');
-const TOKEN = process.env.TOKEN || 3000;
+const keepAlive = require('./utils/server');
+const TOKEN = process.env.TOKEN || null;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -27,8 +27,7 @@ for (const folder of commandFolders) {
 }
 
 client.once(Events.ClientReady, () => {
-	console.log('Ready!');
-	webhookListener.listen();
+	console.log('Curator crime is ready!');
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -50,4 +49,5 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
+keepAlive();
 client.login(TOKEN);
