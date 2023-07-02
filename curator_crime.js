@@ -6,7 +6,7 @@ const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const keepAlive = require('./utils/server');
 const TOKEN = process.env.TOKEN || null;
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: 17 });
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
