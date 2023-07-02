@@ -14,6 +14,5 @@ class WebhookListener {
 }
 
 const listener = new WebhookListener();
-listener.listen();
 
 module.exports = listener;
