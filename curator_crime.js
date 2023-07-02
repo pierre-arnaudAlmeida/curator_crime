@@ -28,6 +28,7 @@ for (const folder of commandFolders) {
 
 client.once(Events.ClientReady, () => {
 	console.log('Ready!');
+	webhookListener.listen();
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -50,5 +51,3 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 client.login(TOKEN);
-
-webhookListener.listen();
