@@ -1,6 +1,7 @@
 const { Client, IntentsBitField, Collection, ActivityType } = require('discord.js');
 require('dotenv').config();
 const eventHandler = require('./handlers/eventHandler');
+const keepAlive = require('./utils/bot/server')
 
 const TOKEN = process.env.TOKEN || null;
 
@@ -15,6 +16,7 @@ const client = new Client({
 
 client.commands = new Collection();
 
+keepAlive();
 eventHandler(client);
 
 client.login(TOKEN);
