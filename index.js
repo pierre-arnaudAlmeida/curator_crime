@@ -3,7 +3,7 @@ require('dotenv').config();
 const eventHandler = require('./src/handlers/eventHandler');
 const keepAlive = require('./src/utils/bot/server')
 
-const TOKEN = process.env.TOKEN || null;
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN || null;
 
 const client = new Client({
     intents: [
@@ -19,4 +19,4 @@ client.commands = new Collection();
 keepAlive();
 eventHandler(client);
 
-client.login(TOKEN);
+client.login(DISCORD_TOKEN);
