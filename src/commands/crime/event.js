@@ -10,9 +10,8 @@ let completed = null;
 
 function computeDescription(gang, percentage, completed) {
 	let message = null;
-	const localDate = new Date();
-	const firstDay = BotUtils.subtractDays(localDate, 7);
-    const lastDay = BotUtils.subtractDays(localDate, 1);
+	const firstDay = BotUtils.subtractDays(new Date(), 7);
+    const lastDay = BotUtils.subtractDays(new Date(), 1);
 
 	message = "\n\nVenho informar que os "+ "<@&" + gang.id + "> realizaram **" + percentage + "%** de participação em eventos nesta semana ";
 	message += "(" + BotUtils.computeDate(firstDay) + " a " + BotUtils.computeDate(lastDay) + ")";
