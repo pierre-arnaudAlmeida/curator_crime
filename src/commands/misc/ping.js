@@ -2,7 +2,7 @@ module.exports = {
     name: 'ping',
     description: 'Check delay of response',
     // devOnly: Boolean,
-    testOnly: false,
+    // testOnly: Boolean,
     // options: Object[],
     // deleted: Boolean,
   

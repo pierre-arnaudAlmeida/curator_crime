@@ -23,7 +23,7 @@ function computeDescription(add_or_remove, gang, nbr_of_verbal_warns, reason, du
 	message += " um  aviso verbal, encontram-se com **VERBAL WARN ("+ nbr_of_verbal_warns + "/"+ process.env.MAX_VERBAL_WARNS +")**";
 	message += "\n\nMotivo : " + reason;
 
-	if (!duration && duration != 0) {
+	if (duration && duration != 0) {
 		message += "\nDuração : " + duration + " dias";
 	}
 
