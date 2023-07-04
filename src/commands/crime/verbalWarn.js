@@ -89,7 +89,7 @@ module.exports = {
 	  callback: (client, interaction) => {
 		getParameters(interaction);
 
-		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso Verbal", computeDescription(add_or_remove, gang, nbr_of_warns, reason, duration), Colors.Red), interaction)
+		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso Verbal", computeDescription(add_or_remove, gang, nbr_of_verbal_warns, reason, duration), Colors.Red), interaction)
 
 		interaction.reply('Message sent');
 	},
