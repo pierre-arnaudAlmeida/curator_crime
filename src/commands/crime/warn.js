@@ -24,11 +24,11 @@ function computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, 
 	message += " um aviso, encontram-se com **WARN ("+ nbr_of_warns + "/"+ process.env.MAX_WARNS +")**";
 	message += "\n\nMotivo : " + reason;
 
-	if (!mission) {
+	if (mission) {
 		message += "\nMissão : " + mission;
 	}
 
-	if (!duration && duration != 0) {
+	if (duration && duration != 0) {
 		message += "\nDuração : " + duration + " dias";
 	}
 
