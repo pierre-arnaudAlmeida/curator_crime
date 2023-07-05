@@ -3,12 +3,13 @@ const BotUtils = require('./botUtils');
 
 module.exports = class MessageUtils {
     
-    static createEmbed (title, description, color) {
+    static createEmbed (title, description, color, author) {
         const embedBuilder = new EmbedBuilder();
 
         embedBuilder.setColor(color);
         embedBuilder.setTitle(title);
         embedBuilder.setDescription(description);
+        embedBuilder.setFooter({ text:`by : ${author}`});
 
         return embedBuilder;
     }

@@ -61,12 +61,13 @@ module.exports = {
 	callback: (client, interaction) => {
 		getParameters(interaction);
 
+		const user = interaction.member.nickname ?? interaction.user.username;
 		if (completed) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeCompletedDescription(gang), Colors.Red), interaction)
+			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeCompletedDescription(gang), Colors.Red, user), interaction)
 		} 
 		
 		if (reseted) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeResetedDescription(reseted), Colors.Red), interaction)
+			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeResetedDescription(reseted), Colors.Red, user), interaction)
 		}
 
 		interaction.reply('Message sent');

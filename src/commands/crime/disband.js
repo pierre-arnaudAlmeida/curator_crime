@@ -60,9 +60,10 @@ module.exports = {
 	
 	callback: (client, interaction) => {
 		getParameters(interaction);
-
+		
+		const user = interaction.member.nickname ?? interaction.user.username;
 		if (add_or_remove) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio disband", computeDescription(gang, reason), Colors.Red), interaction)
+			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio disband", computeDescription(gang, reason), Colors.Red, user), interaction)
 		}
 		interaction.reply('Message sent');
 	},

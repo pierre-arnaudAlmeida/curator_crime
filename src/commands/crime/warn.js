@@ -101,7 +101,8 @@ module.exports = {
 	callback: (client, interaction) => {
 		getParameters(interaction);
 
-		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso", computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, duration), Colors.Red), interaction)
+		const user = interaction.member.nickname ?? interaction.user.username;
+		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso", computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, duration), Colors.Red, user), interaction)
 
 		interaction.reply('Message sent');
 	},
