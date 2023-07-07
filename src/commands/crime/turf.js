@@ -70,6 +70,6 @@ module.exports = {
 			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeResetedDescription(reseted), Colors.Red, user), interaction)
 		}
 
-		interaction.reply('Message sent');
+		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio turfs", true, Colors.Green) ] });
 	},
 };

@@ -65,6 +65,7 @@ module.exports = {
 		if (add_or_remove) {
 			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio disband", computeDescription(gang, reason), Colors.Red, user), interaction)
 		}
-		interaction.reply('Message sent');
+
+		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio disband", true, Colors.Green) ] });
 	},
 };
