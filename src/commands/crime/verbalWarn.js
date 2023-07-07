@@ -92,6 +92,6 @@ module.exports = {
 		const user = interaction.member.nickname ?? interaction.user.username;
 		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso Verbal", computeDescription(add_or_remove, gang, nbr_of_verbal_warns, reason, duration), Colors.Red, user), interaction)
 
-		interaction.reply('Message sent');
+		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Aviso verbal", true, Colors.Green) ] });
 	},
 };

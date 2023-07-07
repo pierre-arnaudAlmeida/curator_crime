@@ -14,6 +14,24 @@ module.exports = class MessageUtils {
         return embedBuilder;
     }
 
+    static commandResponseEmbed (title, sended, color) {
+        const embedBuilder = new EmbedBuilder();
+        let description = "";
+
+        embedBuilder.setColor(color);
+        embedBuilder.setTitle(title);
+
+        if (sended) {
+            description = "Mensagem corretamente enviada"
+        } else {
+            description = "Mensagem nao enviada"
+        }
+
+        embedBuilder.setDescription(description);
+        
+        return embedBuilder;
+    }
+
     static sendEmbed (channel, gang, embedBuilder, interaction) {
         const Curator = BotUtils.getCurator(interaction);
         const SeniorCurator = BotUtils.getSeniorCurator(interaction);

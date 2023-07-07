@@ -79,6 +79,6 @@ module.exports = {
 		const user = interaction.member.nickname ?? interaction.user.username;
 		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso", computeDescription(gang, percentage, completed), Colors.Red, user), interaction)
 
-		interaction.reply('Message sent');
+		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio eventos", true, Colors.Green) ] });
 	},
 };

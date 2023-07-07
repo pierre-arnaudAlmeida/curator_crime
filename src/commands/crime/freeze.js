@@ -78,6 +78,6 @@ module.exports = {
 		const user = interaction.member.nickname ?? interaction.user.username;
 		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso", computeDescription(freeze, gang, duration), Colors.Red, user), interaction)
 
-		interaction.reply('Message sent');
+		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio freeze", true, Colors.Green) ] });
 	},
 };
