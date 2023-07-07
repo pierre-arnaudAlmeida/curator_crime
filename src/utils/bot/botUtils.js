@@ -33,4 +33,8 @@ module.exports = class BotUtils {
         
         return day + "/" + month + "/" + year;
     }
+
+    static verifyChannel(interaction) {
+        return interaction.channel.name.toLowerCase() === process.env.CHANNEL_NAME.toLowerCase();
+    }
 }

@@ -1,5 +1,8 @@
 const { devs, testServer } = require('../../../config.json');
+const BotUtils = require('../../utils/bot/botUtils');
+const MessageUtils = require('../../utils/bot/messageUtils');
 const getLocalCommands = require('../../utils/command/getLocalCommands');
+const { Colors } = require('discord.js');
 
 module.exports = async (client, interaction) => {
     if (!interaction.isChatInputCommand()) return;
@@ -10,6 +13,14 @@ module.exports = async (client, interaction) => {
         const commandObject = localCommands.find((cmd) => cmd.name === interaction.commandName);
 
         if (!commandObject) return;
+
+        if (!BotUtils.verifyChannel(interaction)) {
+            interaction.reply({
+                embeds: [ MessageUtils.commandResponseEmbed("Execuçao de commando", false, Colors.Red) ] ,
+                ephemeral: true,
+            });
+            return;
+        }
 
         if (commandObject.devOnly) {
             if (!devs.includes(interaction.member.id)) {
