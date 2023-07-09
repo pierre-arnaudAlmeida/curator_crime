@@ -15,16 +15,16 @@ function computeDescription(freeze, duration) {
 	message = "\n\nA organização encontra-se ";
 
 	if (freeze) {
-		message += "congelados ";
+		message += "congelada ";
 
 		if (duration && duration != 0) {
 			endDate = BotUtils.addDays(new Date(), duration);
 			message += "até dia : " + BotUtils.computeDate(endDate);
 		}
 
-		message += "\n\n**Proibido :**\n- Participar em eventos\n- Qualquer tipo de ação ou interação com a organização\n- Fazer assaltos, grafitis\n\nQualquer atividade feita como organização será punida.\n\n";
+		message += "\n\n**Proibido :**\n- Participar em eventos\n- Qualquer tipo de ação ou interação com a organização\n- Fazer assaltos, grafitis\n\nQualquer atividade feita como organização será punida.";
 	} else {
-		message += "descongeladas.\n\nPodem voltar a participar em eventos e todas as atividades ilegais como organização.\n\n";
+		message += "descongelada.\n\nPodem voltar a participar em eventos e todas as atividades ilegais como organização.";
 	}
 
 	return message;

@@ -12,7 +12,7 @@ function computeCompletedDescription() {
 }
 
 function computeResetedDescription() {
-	return "\n\nVenho informar aos que os territórios foram reiniciados.\n\nBoa sorte para a temporada.";
+	return "\n\nVenho informar que os territórios foram reiniciados.\n\nBoa sorte para a temporada.";
 }
 
 function getParameters(interaction) {
