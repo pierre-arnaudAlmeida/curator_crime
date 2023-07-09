@@ -8,11 +8,11 @@ let gang = null;
 let channel = null;
 let duration = null;
 
-function computeDescription(freeze, gang, duration) {
+function computeDescription(freeze, duration) {
 	let message = null;
 	let endDate;
 
-	message = "\n\nOs "+ "<@&" + gang.id + "> estao ";
+	message = "\n\nA organização encontra-se ";
 
 	if (freeze) {
 		message += "congelados ";
@@ -22,9 +22,9 @@ function computeDescription(freeze, gang, duration) {
 			message += "até dia : " + BotUtils.computeDate(endDate);
 		}
 
-		message += "\n\n**Proibido :**\n- Participar em eventos\n- Atuar como organização <@&" + gang.id + "> seja no ghetto, na cidade e fora da cidade.\n- Fazer grafitis\n\nQualquer atividade ilegal feita com as cores dos <@&" + gang.id + "> será punida";
+		message += "\n\n**Proibido :**\n- Participar em eventos\n- Qualquer tipo de ação ou interação com a organização\n- Fazer assaltos, grafitis\n\nQualquer atividade feita como organização será punida.\n\n";
 	} else {
-		message += "descongelados.\n\nPodem voltar a participar em eventos e todas as atividades ilegais como organização.";
+		message += "descongeladas.\n\nPodem voltar a participar em eventos e todas as atividades ilegais como organização.\n\n";
 	}
 
 	return message;
@@ -76,7 +76,7 @@ module.exports = {
 		getParameters(interaction);
 
 		const user = interaction.member.nickname ?? interaction.user.username;
-		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio freeze", computeDescription(freeze, gang, duration), Colors.Red, user), interaction)
+		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio freeze", computeDescription(freeze, duration), Colors.Red, user), interaction)
 
 		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio freeze", true, Colors.Green) ] });
 	},

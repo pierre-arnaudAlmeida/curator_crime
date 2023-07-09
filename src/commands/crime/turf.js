@@ -7,12 +7,12 @@ let gang = null;
 let channel = null;
 let completed = null;
 
-function computeCompletedDescription(gang) {
-	return"\n\nVenho dar os parabéns aos <@&" + gang.id + "> por capturar 100% dos territórios.\n\nObrigado pelo empenho e boa sorte na próxima temporada.";
+function computeCompletedDescription() {
+	return"\n\nParabéns a organização por capturar 100% dos territórios de turf.\n\nObrigado pelo empenho e boa sorte para a próxima temporada.";
 }
 
-function computeResetedDescription(gang) {
-	return "\n\nVenho informar aos <@&" + gang.id + "> que os territórios foram reiniciados.\n\nBoa sorte na temporada.";
+function computeResetedDescription() {
+	return "\n\nVenho informar aos que os territórios foram reiniciados.\n\nBoa sorte para a temporada.";
 }
 
 function getParameters(interaction) {
@@ -63,11 +63,11 @@ module.exports = {
 
 		const user = interaction.member.nickname ?? interaction.user.username;
 		if (completed) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeCompletedDescription(gang), Colors.Red, user), interaction)
+			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeCompletedDescription(), Colors.Red, user), interaction)
 		} 
 		
 		if (reseted) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeResetedDescription(reseted), Colors.Red, user), interaction)
+			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeResetedDescription(), Colors.Red, user), interaction)
 		}
 
 		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio turfs", true, Colors.Green) ] });

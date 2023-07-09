@@ -8,18 +8,18 @@ let channel = null;
 let percentage = null;
 let completed = null;
 
-function computeDescription(gang, percentage, completed) {
+function computeDescription(percentage, completed) {
 	let message = null;
 	const firstDay = BotUtils.subtractDays(new Date(), 7);
     const lastDay = BotUtils.subtractDays(new Date(), 1);
 
-	message = "\n\nVenho informar que os "+ "<@&" + gang.id + "> realizaram **" + percentage + "%** de participação em eventos nesta semana ";
+	message = "\n\nInformo que a organização realizou **" + percentage + "%** de participação dos eventos desta semana ";
 	message += "(" + BotUtils.computeDate(firstDay) + " a " + BotUtils.computeDate(lastDay) + ")";
 
 	if (completed) {
-		message += "\n\nObrigado pelo empenho e boa sorte na próxima semana";
+		message += "\n\nObrigado pelo empenho e boa sorte para próxima";
 	} else {
-		message += "Pedimos mais empenho e boa sorte na próxima semana";
+		message += "\n\nPedimos mais empenho e boa sorte para próxima";
 	}
 
 	return message;
@@ -77,7 +77,7 @@ module.exports = {
 		getParameters(interaction);
 
 		const user = interaction.member.nickname ?? interaction.user.username;
-		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio eventos", computeDescription(gang, percentage, completed), Colors.Red, user), interaction)
+		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio eventos", computeDescription(percentage, completed), Colors.Red, user), interaction)
 
 		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio eventos", true, Colors.Green) ] });
 	},

@@ -9,10 +9,10 @@ let nbr_of_verbal_warns = null;
 let reason = null;
 let duration = null;
 
-function computeDescription(add_or_remove, gang, nbr_of_verbal_warns, reason, duration) {
+function computeDescription(add_or_remove, nbr_of_verbal_warns, reason, duration) {
 	let message = null;
 
-	message = "\n\nOs "+ "<@&" + gang.id + "> acabam de ";
+	message = "\n\nAcabam de ";
 
 	if (add_or_remove) {
 		message += "receber";
@@ -90,7 +90,7 @@ module.exports = {
 		getParameters(interaction);
 
 		const user = interaction.member.nickname ?? interaction.user.username;
-		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso Verbal", computeDescription(add_or_remove, gang, nbr_of_verbal_warns, reason, duration), Colors.Red, user), interaction)
+		MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Aviso Verbal", computeDescription(add_or_remove, nbr_of_verbal_warns, reason, duration), Colors.Red, user), interaction)
 
 		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Aviso verbal", true, Colors.Green) ] });
 	},

@@ -7,10 +7,10 @@ let gang = null;
 let channel = null;
 let reason = null;
 
-function computeDescription(gang, reason) {
+function computeDescription(reason) {
 	let message = null;
 
-	message = "\n\nOs "+ "<@&" + gang.id + "> estao disband. \n\nSe tiverem armamento ainda nao devolvido da organização peço que façam ticket ingame.\nCaso contrario poderá ser aplicado a regra geral 6.3.";
+	message = "A Organização esta disband. \n\nSe tiverem armamento ainda nao devolvido da organização peço que façam ticket ingame.\nCaso contrario poderá ser aplicado a Regra Geral 6.3.";
 	message += "\n\nMotivo : " + reason;
 
 	return message;
@@ -63,7 +63,7 @@ module.exports = {
 		
 		const user = interaction.member.nickname ?? interaction.user.username;
 		if (add_or_remove) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio disband", computeDescription(gang, reason), Colors.Red, user), interaction)
+			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio disband", computeDescription(reason), Colors.Red, user), interaction)
 		}
 
 		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio disband", true, Colors.Green) ] });

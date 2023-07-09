@@ -13,7 +13,7 @@ let duration = null;
 function computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, duration) {
 	let message = null;
 
-	message = "\n\nOs "+ "<@&" + gang.id + "> acabam de ";
+	message = "\n\nAcabam de ";
 
 	if (add_or_remove) {
 		message += "receber";

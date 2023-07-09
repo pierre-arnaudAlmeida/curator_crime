@@ -36,9 +36,10 @@ module.exports = class MessageUtils {
         const Curator = BotUtils.getCurator(interaction);
         const SeniorCurator = BotUtils.getSeniorCurator(interaction);
 
-        channel.send({ embeds: [embedBuilder],
-        content: "<@&" + gang.id + ">"});
-        channel.send({ content: `${Curator ? `${Curator}` : "role not found"} \n${SeniorCurator ? `${SeniorCurator}` : "role not found"}`});
+        channel.send({ 
+            embeds: [embedBuilder],
+            content: `${Curator ? `${Curator}` : "role not found"} ${SeniorCurator ? `${SeniorCurator}` : "role not found"}` + "\n\n<@&" + gang.id + ">\n"
+        });
     }
 
 }
