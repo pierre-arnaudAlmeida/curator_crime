@@ -24,7 +24,7 @@ function computeDescription(add_or_remove, nbr_of_verbal_warns, reason, duration
 	message += "\n\nMotivo : " + reason;
 
 	if (duration && duration != 0) {
-		message += "\nDuração : " + duration + " dias";
+		message += "\n\nDuração : " + duration + " dias";
 	}
 
 	return message;

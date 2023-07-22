@@ -25,11 +25,11 @@ function computeDescription(add_or_remove, gang, nbr_of_warns, reason, mission, 
 	message += "\n\nMotivo : " + reason;
 
 	if (mission) {
-		message += "\nMissão : " + mission;
+		message += "\n\nMissão : " + mission;
 	}
 
 	if (duration && duration != 0) {
-		message += "\nDuração : " + duration + " dias";
+		message += "\n\nDuração : " + duration + " dias";
 	}
 
 	return message;
