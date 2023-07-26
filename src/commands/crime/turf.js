@@ -63,11 +63,11 @@ module.exports = {
 
 		const user = interaction.member.nickname ?? interaction.user.username;
 		if (completed) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeCompletedDescription(), Colors.Red, user), interaction)
+			MessageUtils.sendEmbed(client, channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeCompletedDescription(), Colors.Red, user), interaction)
 		} 
 		
 		if (reseted) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeResetedDescription(), Colors.Red, user), interaction)
+			MessageUtils.sendEmbed(client, channel, gang, MessageUtils.createEmbed("Anuncio turfs", computeResetedDescription(), Colors.Red, user), interaction)
 		}
 
 		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio turfs", true, Colors.Green) ] });

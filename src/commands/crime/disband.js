@@ -63,7 +63,7 @@ module.exports = {
 		
 		const user = interaction.member.nickname ?? interaction.user.username;
 		if (add_or_remove) {
-			MessageUtils.sendEmbed(channel, gang, MessageUtils.createEmbed("Anuncio disband", computeDescription(reason), Colors.Red, user), interaction)
+			MessageUtils.sendEmbed(client, channel, gang, MessageUtils.createEmbed("Anuncio disband", computeDescription(reason), Colors.Red, user), interaction)
 		}
 
 		interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio disband", true, Colors.Green) ] });

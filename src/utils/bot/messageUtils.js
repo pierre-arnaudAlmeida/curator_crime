@@ -32,9 +32,9 @@ module.exports = class MessageUtils {
         return embedBuilder;
     }
 
-    static sendEmbed (channel, gang, embedBuilder, interaction) {
-        const Curator = BotUtils.getCurator(interaction);
-        const SeniorCurator = BotUtils.getSeniorCurator(interaction);
+    static sendEmbed (client, channel, gang, embedBuilder, interaction) {
+        const Curator = BotUtils.getCurator(client, interaction);
+        const SeniorCurator = BotUtils.getSeniorCurator(client, interaction);
 
         channel.send({ 
             embeds: [embedBuilder],
