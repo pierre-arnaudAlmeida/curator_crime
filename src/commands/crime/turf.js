@@ -31,7 +31,7 @@ module.exports = {
 	options: [
 		{
 			name: 'reseted',
-			description: '0 : not reseted and 1 : reseted',
+			description: 'False : not reseted and True : reseted',
 			required: true,
 			type: ApplicationCommandOptionType.Boolean,
 		},
@@ -49,7 +49,7 @@ module.exports = {
 		},
 		{
 			name: 'completed',
-			description: '100% turf have been completed ? 0 : NO and 1 : YES',
+			description: '100% turf have been completed ? False : NO and True : YES',
 			required: true,
 			type: ApplicationCommandOptionType.Boolean,
 		},
