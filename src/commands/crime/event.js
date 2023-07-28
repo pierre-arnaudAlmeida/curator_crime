@@ -41,7 +41,7 @@ module.exports = {
 	options: [
 		{
 			name: 'add_or_remove',
-			description: '0 : remove and 1 : add',
+			description: 'False : remove and True : add',
 			required: true,
 			type: ApplicationCommandOptionType.Boolean,
 		},
@@ -65,7 +65,7 @@ module.exports = {
 		},
 		{
 			name: 'completed',
-			description: 'Event requirement completed ?',
+			description: 'Event requirement completed ? False : NO and True : YES',
 			required: true,
 			type: ApplicationCommandOptionType.Boolean,
 		},

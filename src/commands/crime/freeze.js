@@ -46,7 +46,7 @@ module.exports = {
 	options: [
 		{
 			name: 'freeze',
-			description: '0 : NO and 1 : YES',
+			description: 'False : NO and True : YES',
 			required: true,
 			type: ApplicationCommandOptionType.Boolean,
 		},
