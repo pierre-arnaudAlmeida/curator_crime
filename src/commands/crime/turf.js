@@ -22,7 +22,7 @@ function computeResetedDescription() {
 }
 
 function computePOVRequestDescription(message) {
-	return "\n\nPeço que coloquem as Povs da turf seguinte :\n - " + message + "\n\nTem 24h para apresentar as mesmas !";
+	return "\n\nPeço que coloquem as POVs da turf seguinte :\n - " + message + "\n\nTem 24h para apresentar as mesmas !";
 }
 
 function getParameters(interaction) {
