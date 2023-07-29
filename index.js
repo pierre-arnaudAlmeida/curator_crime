@@ -12,6 +12,7 @@ const client = new Client({
         IntentsBitField.Flags.GuildMessages,
         IntentsBitField.Flags.MessageContent,
     ],
+    fetchAllMembers: true
 });
 
 client.commands = new Collection();
