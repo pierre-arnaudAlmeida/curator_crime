@@ -10,8 +10,8 @@ let retrieve_user_list = null;
 function computeDescription() {
 	let message = null;
 
-	message = "Peço que verifiquem os nomes de todos os membros deste discord para que seja possível identificar-los";
-    message += "\nDevem ficar desta forma :";
+	message = "Peço que verifiquem os nomes de todos os membros deste discord para que seja possível identificar-los.";
+    message += "\n\nDevem ficar desta forma :";
     message += "\nNome do Personagem | ID";
     message += "\nExemplo : Jah Carey | 51"
     
