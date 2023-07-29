@@ -21,30 +21,36 @@ function computeDescription() {
 }
 
 async function checkNames(client, interaction) {
-
 	const invalidFormatMembers = [];
+	
+	let members = await client.guilds.cache.get(interaction.guild.id).members.fetch();
+	
+	members.forEach(member => {
+		const nickname = member.nickname;
+		
+		if (!nickname) {
+			invalidFormatMembers.push(member.user.username);
+		} else {
+			const nicknameRegex = /^(.+?)\s?\|\s?(\d+)$|^(.+?)\s(\d+)$/;
+			
+			if (!nicknameRegex.test(nickname)) {
+				invalidFormatMembers.push(member.user.username + " ---- " + nickname);
+			}
+		}
+	});
 
-	  console.log(guild.members.cache.size);
+	return computeNameList(invalidFormatMembers);
+}
 
-        client.guilds.cache.get(interaction.guild.id).members.cache.forEach(member => {
-            const nickname = member.nickname;
-			console.log(nickname);
+function computeNameList(invalidFormatMembers) {
+	let message = "";
 
-            if (!nickname) {
-                // O membro não tem apelido
-                invalidFormatMembers.push(member.user.username);
-            } else {
-                const nicknameRegex = /^(.+?)\s?\|\s?(\d+)$|^(.+?)\s(\d+)$/;
+	if (invalidFormatMembers != null && invalidFormatMembers.size != 0) {
+		message += "\nOs membros seguintes tem um nome que nao corresponde ao padrão :"
+		invalidFormatMembers.forEach(member => message += "\n- " + member );
+	}
 
-                if (!nicknameRegex.test(nickname)) {
-                    invalidFormatMembers.push(member.user.username);
-                }
-            }
-        });
-
-        console.log("Membros com apelido inválido ou sem apelido:", invalidFormatMembers);
-
-	return invalidFormatMembers;
+	return message;
 }
 
 function getParameters(interaction) {
@@ -98,9 +104,16 @@ module.exports = {
 		}
 
         if (retrieve_user_list) {
-            interaction.reply({ embeds: [ MessageUtils.createEmbed("Resultado da verificaçao", checkNames(client, gang, interaction), Colors.Red, user) ] });
-        }
-
-		//interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio", true, Colors.Green) ] });
+			(async () => {
+				let result = await checkNames(client, interaction);
+				if (result.size != 0) {
+					interaction.reply({ embeds: [ MessageUtils.createEmbed("Resultado da verificaçao", result, Colors.Red, user) ] });
+				} else {
+					interaction.reply({ embeds: [ MessageUtils.createEmbed("Resultado da verificaçao", "Tudo OK", Colors.Green, user) ] });
+				}
+			})();
+        } else {
+			interaction.reply({ embeds: [ MessageUtils.commandResponseEmbed("Anuncio", true, Colors.Green) ] });
+		}
 	},
 };
