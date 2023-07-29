@@ -74,7 +74,7 @@ module.exports = {
 		{
 			name: 'message',
 			description: 'Specify the turf infos',
-			required: true,
+			required: false,
 			type: ApplicationCommandOptionType.String,
 		},
 	  ],
