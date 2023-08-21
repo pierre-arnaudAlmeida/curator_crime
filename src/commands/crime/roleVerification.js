@@ -9,50 +9,37 @@ let channel = null;
 let send_message = null;
 let retrieve_user_list = null;
 
-function computeDescription() {
+function computeDescription(gang) {
 	let message = null;
 
-	message = "Peço que verifiquem os nomes de todos os membros deste discord para que seja possível identificar-los.";
-    message += "\n\nDevem ficar desta forma :";
-    message += "\nNome do Personagem | ID";
-    message += "\nExemplo : Jah Carey | 51"
-    
-    message += "\n\nTêm 24 horas para modificar o(s) nome(s), se ao fim de 24 horas ainda existirem pessoas com o nome sem estar em conformidade o player sera kick do discord";
+	message = "Peço que verifiquem os roles de todos os membros deste discord.";
+    message += "\n\nDevem ter o role seguinte :";
+    message += "\n<@&" + gang.id + ">\n";
 
 	return message;
 }
 
-async function checkNames(client, interaction) {
-	const invalidFormatMembers = [];
+async function checkNames(client, interaction, gang) {
+	const missingRoleMembers = [];
 	
 	let members = await client.guilds.cache.get(interaction.guild.id).members.fetch();
 	
 	members.forEach(member => {
 		const adminPermissions = new PermissionsBitField(PermissionsBitField.Flags.Administrator);
-		if(member.user.bot == false && !member.permissions.has(adminPermissions)) {
-			const nickname = member.nickname;
-		
-			if (!nickname) {
-				invalidFormatMembers.push(member.user.username);
-			} else {
-				const nicknameRegex = /^(.+?)\s?\|\s?(\d+)$|^(.+?)\s(\d+)$/;
-			
-				if (!nicknameRegex.test(nickname)) {
-					invalidFormatMembers.push(member.user.username + " ---- " + nickname);
-				}
-			}
+		if(member.user.bot == false && !member.permissions.has(adminPermissions) && member.roles.cache.size > 1 && !member.roles.cache.find(value => value.equals(gang))) {
+				missingRoleMembers.push(member.user.username);
 		}
 	});
 
-	return computeNameList(invalidFormatMembers);
+	return computeNameList(missingRoleMembers);
 }
 
-function computeNameList(invalidFormatMembers) {
+function computeNameList(missingRoleMembers) {
 	let message = "";
 
-	if (invalidFormatMembers != null && invalidFormatMembers.size != 0) {
-		message += "\nOs membros seguintes tem um nome que nao corresponde ao padrão :"
-		invalidFormatMembers.forEach(member => message += "\n- " + member );
+	if (missingRoleMembers != null && missingRoleMembers.size != 0) {
+		message += "\nOs membros seguintes nao tem o role da gang :"
+		missingRoleMembers.forEach(member => message += "\n- " + member );
 	}
 
 	return message;
@@ -67,8 +54,8 @@ function getParameters(interaction) {
 
 module.exports = {
 	delete: false,
-	name: 'name_verification',
-	description: 'You can verify members name',
+	name: 'role_verification',
+	description: 'You can verify members roles',
 	// devOnly: Boolean,
     // testOnly: Boolean,
 	options: [
@@ -86,13 +73,13 @@ module.exports = {
 		},
 		{
 			name: 'send_message',
-			description: 'Send message to update discord names',
+			description: 'Send message to update discord roles',
 			required: true,
 			type: ApplicationCommandOptionType.Boolean,
 		},
         {
 			name: 'retrieve_user_list',
-			description: 'Retrieve for you, a members list without a correct name',
+			description: 'Retrieve for you, a members list without gang role',
 			required: true,
 			type: ApplicationCommandOptionType.Boolean,
 		},
@@ -105,12 +92,12 @@ module.exports = {
 
 		const user = interaction.member.nickname ?? interaction.user.username;
         if (send_message) {
-            MessageUtils.sendEmbed(client, channel, gang, MessageUtils.createEmbed("Anuncio", computeDescription(), Colors.Red, user), interaction)	
+            MessageUtils.sendEmbed(client, channel, gang, MessageUtils.createEmbed("Anuncio", computeDescription(gang), Colors.Red, user), interaction)
 		}
 
         if (retrieve_user_list) {
 			(async () => {
-				let result = await checkNames(client, interaction);
+				let result = await checkNames(client, interaction, gang);
 				if (result.size != 0) {
 					interaction.reply({ embeds: [ MessageUtils.createEmbed("Resultado da verificaçao", result, Colors.Red, user) ] });
 				} else {
