@@ -1,6 +1,8 @@
 require('dotenv').config();
-const { ApplicationCommandOptionType, PermissionFlagsBits, Colors } = require('discord.js');
+const { ApplicationCommandOptionType, Colors } = require('discord.js');
 const MessageUtils = require('../../utils/bot/messageUtils');
+require('../../utils/bot/botUtils');
+const { PermissionsBitField } = require('discord.js');
 
 let gang = null;
 let channel = null;
@@ -15,7 +17,7 @@ function computeDescription() {
     message += "\nNome do Personagem | ID";
     message += "\nExemplo : Jah Carey | 51"
     
-    message += "\n\nTêm 12 horas para modificar o(s) nome(s), se ao fim de 12 horas ainda existirem pessoas com o nome sem estar em conformidade o player sera kick do discord";
+    message += "\n\nTêm 24 horas para modificar o(s) nome(s), se ao fim de 24 horas ainda existirem pessoas com o nome sem estar em conformidade o player sera kick do discord";
 
 	return message;
 }
@@ -26,15 +28,18 @@ async function checkNames(client, interaction) {
 	let members = await client.guilds.cache.get(interaction.guild.id).members.fetch();
 	
 	members.forEach(member => {
-		const nickname = member.nickname;
+		const adminPermissions = new PermissionsBitField(PermissionsBitField.Flags.Administrator);
+		if(member.user.bot == false && !member.permissions.has(adminPermissions)) {
+			const nickname = member.nickname;
 		
-		if (!nickname) {
-			invalidFormatMembers.push(member.user.username);
-		} else {
-			const nicknameRegex = /^(.+?)\s?\|\s?(\d+)$|^(.+?)\s(\d+)$/;
+			if (!nickname) {
+				invalidFormatMembers.push(member.user.username);
+			} else {
+				const nicknameRegex = /^(.+?)\s?\|\s?(\d+)$|^(.+?)\s(\d+)$/;
 			
-			if (!nicknameRegex.test(nickname)) {
-				invalidFormatMembers.push(member.user.username + " ---- " + nickname);
+				if (!nicknameRegex.test(nickname)) {
+					invalidFormatMembers.push(member.user.username + " ---- " + nickname);
+				}
 			}
 		}
 	});
